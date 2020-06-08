@@ -21,15 +21,26 @@ results = soup.findAll('sup', class_="noprint Inline-Template Template-Fact")
 def get_citations_needed_count(URL):
     return len(results)
 
-# def get_citations_list(URL):
-    # citation = results 
-    # citation_list = []
+def get_citations_needed_report(URL):
+    # takes in a url, returns a string 
+    # String should have a line for each citation, in order
 
-    # for cit in citation:
-    #     cit = cit.parent.text.strip()
-    #     citation_list.append(cit)
-    # return citation_list
+    #list to push the results of the parents of the citation
+    list_of_results = []
+    
+    # string to push results too
+    new_string = ""
+
+    for each in results:
+        parent_citation = each.parent.text.strip()
+        list_of_results.append(parent_citation)
+
+    # iterate of all of the text from the citations
+    for new_line in list_of_results: 
+        # adding a new line inbetween credit due to Nate C-K from stack overflow  
+        new_string += new_line + "\r\n" + "\r\n"
+    print(new_string)
 
 
 print(get_citations_needed_count(URL))
-# print(get_citations_needed_count(URL))
+get_citations_needed_report(URL)
